@@ -1,0 +1,98 @@
+## Google Document Generator
+with Google Cloud Function Platform
+
+### Setup
+Make sure you have sdk, java jdk 11, and mvn installed.
+
+
+#### Compiling
+
+`mvn compile`
+
+#### Running Locally
+
+`mvn function:run`
+
+
+## Sample API Request
+
+```
+### Send a form with the text and file fields
+POST http://localhost:8080/
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="payload"; filename="payload.json"
+Content-Type: application/json
+
+
+  {
+    "variables": {
+      "project.title": "Protein Inventory Requirements",
+      "project.start.date": "06/25/2020",
+      "project.author": "Mark Fortner",
+      "project.company": "Aspen Biosciences",
+      "header": "Overview"
+    },
+    "parts": {
+      "sections": "file:template.vtl",
+      "cover": "<img src='image.png' width='528' height='324'/><br/>"
+    },
+    "partsVariables": {
+  "h1": [
+    {
+      "title": "Goals",
+      "content": "The goals of the project are to improve the processes for the storage and handling of barcoded containers within Nurix. The scope of this document is confined to Protein Production, and DEL Screening."
+    },
+    {
+      "title": "Business Process",
+      "content": "The following sections describe  the processes where inventory management plays a part.",
+      "h2": [
+        {
+          "title": "Protein Production",
+          "content": "<p>This section describes the process for creating proteins.</p> <ol> <li>After a target form has been created, and a clone form designed for it, a request is made of a vendor to create a clone, and pre-barcoded vials will be shipped to the vendor. </li> <li> The vendor fulfills the request, and returns the clones in a series of pre-barcoded vials. </li> <li>These vials would be received into inventory (scanned in and registered as batches for a given clone). </li> <li>The protein production user then creates the associated expression, small-scale and large-scale purification tasks. </li> <li>The user can create subsequent purifications from a given aliquot of biomass. Aliquots of purified protein go into pre-barcoded tubes. The biomass itself will be placed into 50ml Falcons. The user will be able to print barcodes for the Falcons. </li> <li>After the large-scale purification has completed, the purified protein is then completely aliquoted and placed into storage at a central location.  The protein scientist will <ol> <li>Scan the 2D barcodes of all the tubes.</li> <li>Scan the barcode on the tube rack</li> <li>Scan the barcode on the freezer rack <ol> <li>Scanning the barcode on the freezer</li> <li>The system should record the date when the tubes were entered into the system as well as the name of the protein scientist. </li> </ol> </li> </ol> </li> <li>The storage location should be visible to all who login into the system.  </li> <li>The person who requested the protein to be produced as well as the project leader should be notified that the protein is ready.   </li> <li>The requester can then either pick up the protein or leave it in the original storage location.   </li> <li>When someone removes a tube from the original storage rack the system should ask<sup><a>[a]</a></sup><sup><a>[b]</a></sup> for an ID of the person who removed the tube, and decrement the number of tubes left on the original storage location. </li> <li>The system should further allow the person who removed the tube to specify a new location for the tube (if so desired, not mandatory) </li> </ol> <p>Note that Protein Production does not hold on to a  master  container. The entire amount of purified protein is aliquoted. </p> "
+        }
+      ]
+    },{
+      "title": "Specifications",
+      "content": "The following sections describe the use cases for the application. ",
+      "h2": [
+        {
+          "title": "Manage Storage Container Hierarchies ",
+          "content": "The system should allow the user to manage a hierarchy of containers. For example, “/Lab 1/Fridge 2/Shelf 3/Box 123456”"
+        },
+        {
+          "title": "Storing Material",
+          "content": "<ol> <li><b>barcode: </b><span>the barcode of the container for the material</span></li> <li><b>material metadata.</b> <span>This varies depending on the type of material, but in the case of proteins this would be the data currently found in the large-scale purification report, such as sequence, target form name, MW, etc.</span> </li> <li><b>date/time:</b> <span>the date and time that the material was stored</span></li> <li><b>location:</b> <span>the location where the material was stored</span></li> <li><b>user:</b> <span>who stored it in the location.</span></li> </ol>",
+          "h3": [
+          {
+            "title": "Storing Material In An Inventory Location",
+            "content": "The system should allow the user to easily store material in an inventory location."
+          }
+          ]
+        }
+      ]
+    }
+  ]
+}
+  }
+
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="word-output.docx"
+Content-Type: application/msword
+
+< ./DesignDoc.docx
+--WebAppBoundary--
+Content-Disposition: form-data; name="partial1"; filename="template.vtl"
+Content-Type: application/msword
+
+< ./template.vtl
+--WebAppBoundary--
+Content-Disposition: form-data; name="partial2"; filename="template2.vtl"
+Content-Type: application/msword
+
+< ./template.vtl
+--WebAppBoundary--
+
+```

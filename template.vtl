@@ -1,0 +1,12 @@
+#foreach( $h1_requirement in $h1 )
+     <h1 class="Heading1">${h1_requirement.title}</h1>
+     <p class="TextBody">${h1_requirement.content}</p>
+     #foreach( $h2_requirement in $h1_requirement.h2 )
+        <h2 class="Heading2">${h2_requirement.title}</h2>
+        <p class="TextBody">${h2_requirement.content}</p>
+        #foreach( $h3_requirement in $h2_requirement.h3 )
+            <h3 class="Heading3">${h3_requirement.title}</h3>
+            <p class="TextBody">${h3_requirement.content}</p>
+        #end
+     #end
+#end
