@@ -152,8 +152,8 @@ public class WordDocument {
      * @return Document file.
      * @throws Docx4JException caused when saving document.
      */
-    public File save() throws Docx4JException {
-        File wordFile = new File("WordOutputFile.docx");
+    public File save() throws Docx4JException, IOException {
+        File wordFile = File.createTempFile("WordOutput", ".docx");
         template.save(wordFile);
         return wordFile;
     }

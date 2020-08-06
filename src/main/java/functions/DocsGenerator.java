@@ -66,6 +66,7 @@ public class DocsGenerator implements HttpFunction {
             FileInputStream fileInputStream = new FileInputStream(word);
             OutputStream outputStream = response.getOutputStream();
             fileInputStream.transferTo(outputStream);
+            word.delete();
         } catch (Docx4JException e) {
             e.printStackTrace();
             response.setStatusCode(HttpURLConnection.HTTP_BAD_REQUEST);
