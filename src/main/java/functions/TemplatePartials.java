@@ -1,6 +1,7 @@
 package functions;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -116,7 +117,8 @@ public class TemplatePartials {
             }
             StringWriter stringWriter = new StringWriter();
             Velocity.evaluate(dataModel, stringWriter, singlePart, templateString);
-            String wrappedTemplate = "<div>" + stringWriter.toString() + "</div>";
+            String wrappedTemplate = StringEscapeUtils.unescapeHtml4("<div>" + stringWriter.toString() + "</div>");
+            wrappedTemplate = wrappedTemplate.replaceAll("&", "&amp;");
             partials.put(singlePart, wrappedTemplate);
         }
         return getPartials();

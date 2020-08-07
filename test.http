@@ -17,7 +17,7 @@ Content-Type: application/json
     },
     "parts": {
       "sections": "file:template.vtl",
-      "cover": "<img src='image.png' width='528' height='324'/><br/>"
+      "cover": "<img src='https://firebasestorage.googleapis.com/v0/b/project-builder-development.appspot.com/o/generate_documents%2Fimage.png?alt=media&token=81e0c8b1-b27f-4c5a-8868-39db0e3896ae' width='528' height='324'/><br/> &nbsp;"
     },
     "partsVariables": {
   "h1": [

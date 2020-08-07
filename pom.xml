@@ -49,6 +49,11 @@
             <artifactId>docx4j-ImportXHTML</artifactId>
             <version>8.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
